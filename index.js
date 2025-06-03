@@ -86,7 +86,7 @@ function updatebg() {
         cBTN.style.backgroundColor = 'white'
         cBTN.style.color = 'black';
     } else {
-        bgDiv.style.backgroundImage = 'url("../images/pokeball_background_opaque.png")'
+        bgDiv.style.backgroundImage = 'url("images/pokeball_background_opaque.png")'
         bgDiv.style.opacity = '32%';
         document.body.style.fontWeight = 'bold';
         bgDiv.style.filter = "brightness(75%)"
