@@ -49,7 +49,7 @@ fields.forEach(({ id, label }) => {
 
     if (id !== "pack_quantity" && id !== "wonder_pick_quantity") {
         const img = document.createElement("img");
-        img.src = `../images/${id.substring(0,id.indexOf("_quantity"))}.png`;
+        img.src = `images/${id.substring(0,id.indexOf("_quantity"))}.png`;
         img.alt = id; 
 
         const size = 32 * (isNaN(id.split('_')[0]) ? 1 : parseInt(id.split('_')[0]));
@@ -71,12 +71,12 @@ const resultsModal = document.getElementById('results-modal');
 function updatebg() {
     
     if (toggle.checked) {
-        bgDiv.style.backgroundImage = 'url("../images/ultraball_background_opaque.png")'
+        bgDiv.style.backgroundImage = 'url("images/ultraball_background_opaque.png")'
         bgDiv.style.opacity = '100%';
         bgDiv.style.filter = "brightness(50%)"
         document.body.style.color = 'white';
 
-        infoIcon.src = "../images/black_i_on_white.png";
+        infoIcon.src = "images/black_i_on_white.png";
 
         modal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
         modal.style.color = 'white';
@@ -92,7 +92,7 @@ function updatebg() {
         bgDiv.style.filter = "brightness(75%)"
         document.body.style.color = 'black';
         
-        infoIcon.src = "../images/white_i_on_black.png";    
+        infoIcon.src = "images/white_i_on_black.png";    
         
         modal.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
         modal.style.color = 'black';
