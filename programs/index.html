@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+</head>
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+<link rel = "stylesheet" href = "styles.css">
+<body>
+    <div class="background-image" id="backgroundImage"></div>
+    <div class = "header-row">
+        <h1>Pokémon TCG Pocket Pack Luck Calculator</h1>
+        <div class="lightdarkbutton">
+             <!--Dark/Light Mode-->
+            <!--Source: https://maketechstuffs.blogspot.com/2023/02/toggle-button-using-html-and-css.html -->
+            <span id = "buttonDesc">Light/Dark mode toggle</span>
+            <input type="checkbox" id="check">
+	        <label for="check" class="button"></label>
+        </div>
+    </div>
+
+    <div class = "subheader-row">
+        <h3>Is your luck bad, average, good, or amazing?</h3>
+        <img id = "infoIcon" src = "../images/black_i_on_white.png" alt = "Info Icon">
+
+        <div class = "modal" id = "modal">
+           
+            <div class = "modal-content">
+                <h1>Instructions</h1>
+                <p> To find out how many packs you have opened and how many wonder picks you have done, 
+                    click on the circled button in your Pokemon TCG Pocket app. 
+                </p>
+                <img class = "instructions" src = "../images/ptcgp_homepage.png" alt = "PTCGP HOMEPAGE">
+                <p>Once you have opened your profile, you should scroll until you find the following trophies. This is under the "Achivements" section. 
+                    Click on the circled trophy to find out how many packs you have opened (excluding promo packs). Click the adjacent trophy to find out 
+                    how many wonder picks you have done.
+                </p>
+                <img class = "instructions" src = "../images/achievements.png" alt = "achievements">
+                <p>To find how many cards of each rarity you have, press the highlighted icon to open the search menu.</p>
+                <img class = "instructions" src = "../images/search1.png" alt = "search1">
+                <p>Select one of the rarity buttons in the highlighted area. Then, scroll down until you reach the "search" button.  </p>
+                <img class = "instructions" src = "../images/search2.png" alt = "search2">
+                <p>Lastly, you will be presented with only the cards of the rarity you selected. The number of cards you have of that rarity will be displayed in the highlighted area.</p>
+                <img class = "instructions" src = "../images/search3.png" alt = "search3">
+
+            </div>
+        </div>
+    </div>
+   
+    <div id="fields"></div>
+
+    <button id="calculate-btn" type="submit">Find Probability</button>
+    <div id="results-modal" class="modal">
+        <div class="modal-content">
+                <span id="close-results-modal" class="close-btn">&times;</span>
+            <h1 align="center">Luck Results</h1>
+            <div id="results-container" class="instructions"></div>
+                
+        </div>
+    </div>
+    
+    <script type="module" src = "index.js"></script>
+    <script type="module" src = "probabilities.js"></script>
+</body>
+</html>
+<!--
+https://www.youtube.com/watch?v=vimZLEd702Y BACKGROUND TUTORIAL
+-->
