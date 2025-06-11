@@ -1,7 +1,6 @@
 import { fields } from "./index.js";
 
 function binomialProbability(x, n, p) {
-    if (x <= 0) return 1;
     
     let prob = 0;
     for (let i = 0; i < x; i++) {
@@ -51,11 +50,9 @@ const probSlot5 = {
 const wonderAdjustments = {
     "1_star_gold": 0,
     "4_diamond": 0,
-    "1_diamond": 0,
     "2_diamond": 0,
     "3_diamond": 0
 };
-
 
 //Probability calculations and form submission
 document.getElementById("calculate-btn").addEventListener("click", () => {
@@ -86,18 +83,16 @@ document.getElementById("calculate-btn").addEventListener("click", () => {
     const totalTrials = packQuantity * 2;
     const wonderTrials = Math.floor(wonderPicks / 5);
     const halfWonder = Math.floor(wonderTrials / 2);
-    const remainingWonder = wonderTrials - halfWonder * 2;
 
     wonderAdjustments["1_star_gold"] = halfWonder;
     wonderAdjustments["4_diamond"] = halfWonder;
+    wonderAdjustments["3_diamond"] = halfWonder;
 
-    wonderAdjustments["1_diamond"] += Math.floor(remainingWonder * (3 / 5));
-    wonderAdjustments["2_diamond"] += Math.floor(remainingWonder * (1 / 10));
-    wonderAdjustments["3_diamond"] += Math.floor(remainingWonder * (1 / 10));
+    wonderAdjustments["2_diamond"] += halfWonder * 2;
    
     Object.keys(wonderAdjustments).forEach(id => {
-    const key = id + "_quantity";
-    if (formData[key] !== undefined) {
+        const key = id + "_quantity";
+        if (formData[key] !== undefined) {
             formData[key] -= wonderAdjustments[id];
             if (formData[key] < 0) formData[key] = 0;
         }
@@ -108,12 +103,7 @@ document.getElementById("calculate-btn").addEventListener("click", () => {
         let observed = formData[id + "_quantity"];
 
         // Apply Wonder Pick adjustment inline
-        if (id === "1_star_gold_quantity") {
-            observed = adjusted1StarGold;
-        }
-        if (id === "4_diamond_quantity") {
-            observed = adjusted4Diamond;
-        }
+
 
         const avgP = (probSlot4[id] + probSlot5[id]) / 2;
         const prob = binomialProbability(observed, totalTrials, avgP);
@@ -125,7 +115,9 @@ document.getElementById("calculate-btn").addEventListener("click", () => {
     });
 
    showResultsModal(probabilities);
-   
+   console.log(wonderAdjustments);
+console.log(formData);
+console.log(probabilities)
 });
 
 
