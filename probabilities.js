@@ -54,7 +54,6 @@ const wonderAdjustments = {
     "3_diamond": 0
 };
 
-//Probability calculations and form submission
 document.getElementById("calculate-btn").addEventListener("click", () => {
     
     const packQuantity = document.getElementById('pack_quantity').value.trim();
@@ -62,6 +61,7 @@ document.getElementById("calculate-btn").addEventListener("click", () => {
 
     let isValid = true;
     const formData = {};
+    const originalFormData = {};
 
     fields.forEach(({id}) => {
         let input = document.getElementById(id); 
@@ -73,6 +73,7 @@ document.getElementById("calculate-btn").addEventListener("click", () => {
         } else {
             input.style.border = "";  
             formData[id] = parseInt(value);
+            originalFormData[id] = parseInt(value);
         }
     });
     if (!isValid) {
@@ -101,15 +102,11 @@ document.getElementById("calculate-btn").addEventListener("click", () => {
     const probabilities = [];
     Object.keys(probSlot4).forEach(id => {
         let observed = formData[id + "_quantity"];
-
-        // Apply Wonder Pick adjustment inline
-
-
         const avgP = (probSlot4[id] + probSlot5[id]) / 2;
         const prob = binomialProbability(observed, totalTrials, avgP);
         probabilities.push({
             cardType: id,
-            observed,
+            observed: originalFormData[id + "_quantity"],
             probability: prob,
         });
     });
