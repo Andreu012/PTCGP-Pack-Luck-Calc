@@ -89,7 +89,7 @@ document.getElementById("calculate-btn").addEventListener("click", () => {
     wonderAdjustments["4_diamond"] = halfWonder;
     wonderAdjustments["3_diamond"] = halfWonder;
 
-    wonderAdjustments["2_diamond"] += halfWonder * 2;
+    wonderAdjustments["2_diamond"] += halfWonder*2;
    
     Object.keys(wonderAdjustments).forEach(id => {
         const key = id + "_quantity";
@@ -104,10 +104,13 @@ document.getElementById("calculate-btn").addEventListener("click", () => {
         let observed = formData[id + "_quantity"];
         const avgP = (probSlot4[id] + probSlot5[id]) / 2;
         const prob = binomialProbability(observed, totalTrials, avgP);
+        const expected = avgP * totalTrials;
+        console.log(totalTrials);
         probabilities.push({
             cardType: id,
             observed: originalFormData[id + "_quantity"],
             probability: prob,
+            expected: expected.toFixed(3),
         });
     });
 
@@ -127,15 +130,29 @@ function showResultsModal(probabilities) {
     const container = document.getElementById("results-container");
     container.innerHTML = ""; 
     
-    probabilities.forEach(({ cardType, observed, probability }) => {
-        const entry = document.createElement("p");
-        const formattedProb = (probability * 100).toFixed(3);
+    probabilities.forEach(({ cardType, observed, probability, expected }) => {
+
+         const entry = document.createElement("div");
+        entry.style.padding = "10px";
+
         const readableType = cardType.replace(/_/g, " ");
-        entry.textContent = `You had approximately a ${formattedProb}% chance of getting ${observed}, ${readableType.replace(/_/g, " ")} cards.\n`;
+        const formattedProb = (probability * 100).toFixed(3);
+
+        const observedLine = document.createElement("p");
+        observedLine.innerHTML = `You had approximately a <strong>${formattedProb}%</strong> chance of getting <strong>${observed}</strong> ${readableType} cards.`;
+
+        const expectedLine = document.createElement("p");
+        expectedLine.innerHTML = `Expected without Wonder Picks: <strong>${expected}</strong> cards.`;
+
+        entry.appendChild(observedLine);
+        entry.appendChild(expectedLine);
+
         if (cardType.includes("shiny")) {
-            entry.textContent += " (Assuming that all packs opened had a chance to provide shiny cards)"
+            const shinyNote = document.createElement("p");
+            shinyNote.innerHTML = `<em>(Assuming that all packs opened had a chance to provide shiny cards)</em>`;
+            entry.appendChild(shinyNote);
         }
-        entry.style.padding = "10px"
+
         container.appendChild(entry);
     });
 
