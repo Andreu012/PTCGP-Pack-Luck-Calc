@@ -5,7 +5,7 @@ Tech used:
 - HTML: Form submission structure and modal implementations.
 - CSS: Light/Dark modes, responsive design, and images from the game for clear commmunication.
 - Javascript: Calculations using binomial probability.
-- 
+
 Features:
 
 - Input data from your Pokemon TCG Pocket app including: the amount of packs opened, wonder picks completed, and the amount of cards from each rarity.
